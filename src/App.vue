@@ -35,6 +35,16 @@ import Informacion from './components/Informacion.vue'
 
 
       <RouterView />
+
+      <!-- Footer Start -->
+      <div class="container py-4 bg-secondary text-center">
+          <p class="m-0 text-white">
+              &copy; <a class="text-white font-weight-bold" href="#">Mi blog</a>. 
+              Todos los derechos reservados. Desarrollado por
+              <a class="text-white font-weight-bold" href="https://github.com/@josema">Josema</a>
+          </p>
+      </div>
+      <!-- Footer End -->
     </div>
 
   </div>

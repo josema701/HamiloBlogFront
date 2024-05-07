@@ -3,6 +3,7 @@ import InicioView from '../views/InicioView.vue'
 import VerMasView from '../views/VerMasView.vue'
 import CategoriasView from '../views/CategoriasView.vue'
 import BlogView from '../views/BlogView.vue'
+import AuthView from '../views/AuthView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -26,6 +27,11 @@ const router = createRouter({
       path: '/categorias',
       name: 'categorias',
       component: CategoriasView
+    },
+    {
+      path: '/auth',
+      name: 'auth',
+      component: AuthView
     },
     {
       path: '/about',

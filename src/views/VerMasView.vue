@@ -36,12 +36,18 @@
             <div class="col-12 py-4">
                 <button v-for="tag in post.tags" :key="tag" @click="filtrar(tag)" class="btn btn-sm btn-outline-primary mb-1">{{ tag }}</button>
             </div>
+
             <div class="col-12 py-4">
                 <div class="btn-group btn-group-lg w-100">
-                    <button type="button" class="btn btn-outline-primary"><i class="fa fa-angle-left mr-2"></i> Previous</button>
-                    <button type="button" class="btn btn-outline-primary">Next<i class="fa fa-angle-right ml-2"></i></button>
+                    <button @click="cambiarPost('anterior')" type="button" class="btn btn-outline-primary">
+                        <i class="fa fa-angle-left mr-2"></i> Anterior
+                    </button>
+                    <button @click="cambiarPost('siguiente')" type="button" class="btn btn-outline-primary">
+                        Siguiente <i class="fa fa-angle-right ml-2"></i>
+                    </button>
                 </div> 
             </div>
+
             <div class="col-12 py-4">
                 <h3 class="mb-4 font-weight-bold">{{ post.cant_comentarios }} Comentarios</h3>
                 <div v-for="coment in post.comentarios" :key="coment" class="media mb-4">
@@ -111,6 +117,7 @@
                     const { data } = await axios.get(baseUrl + '/posts/' + idPost);
                     post.value = data.datos;
                     console.log(data.datos);
+                    window.scrollTo(0,0);
                 } catch (error){
                     console.log(error);
                 }
@@ -120,10 +127,28 @@
                 router.push({path: '/blog/' + param});
             }
 
+            const cambiarPost = async (param) => { // param: anterior, siguiente
+                try {
+                    const { data } = await axios.get(baseUrl + '/posts/' + idPost + '/' + param);
+                    // console.log(data);
+                    let nuevoId = data.postId;
+                    if(nuevoId != idPost){
+                        router.push({path: '/vermas/'+ nuevoId});
+                        idPost = nuevoId;
+                        obtenerDatos();
+                    } else {
+                        alert('No hay más Posts!');
+                    }
+                } catch (error) {
+                    console.log(error);   
+                }
+            }
+
             return {
                 idPost,
                 post,
                 filtrar,
+                cambiarPost,
             }
         }
     }

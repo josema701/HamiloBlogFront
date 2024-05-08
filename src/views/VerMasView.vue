@@ -59,40 +59,29 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12">
-                <h3 class="mb-4 font-weight-bold">Leave a comment</h3>
-                <form>
-                    <div class="form-group">
-                        <label for="name">Name *</label>
-                        <input type="text" class="form-control" id="name">
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email *</label>
-                        <input type="email" class="form-control" id="email">
-                    </div>
-                    <div class="form-group">
-                        <label for="website">Website</label>
-                        <input type="url" class="form-control" id="website">
-                    </div>
 
-                    <div class="form-group">
-                        <label for="message">Message *</label>
-                        <textarea id="message" cols="30" rows="5" class="form-control"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <input type="submit" value="Leave Comment" class="btn btn-primary">
-                    </div>
-                </form>
+
+            <div v-if="token" class="col-12">
+                <h3 class="mb-4 font-weight-bold">Escribe un comentario</h3>
+                <div v-show="enviado == true" class="alert alert-success">Tu comentario se envió correctamente!</div>
+                <div class="form-group">
+                    <label for="comentario">Tu comentario *</label>
+                    <textarea id="comentario" v-model="comentario" cols="30" rows="5" class="form-control"></textarea>
+                </div>
+                <div class="form-group">
+                    <button type="button" @click="enviarComentario()" class="btn btn-primary">Enviar comentario </button>
+                </div>
             </div>
+
+            <div v-else class="col-12">
+                <p>Registrate o inicia sesion: </p>
+                <RouterLink to="/auth" class="btn btn-primary">Ingresar</RouterLink>
+            </div>
+
+
         </div>
     </div>
     <!-- Blog Detail End -->
-
-
-    <div>
-
-        kabscjabscjkkbas {{ idPost }}
-    </div>
 </template>
 
 <script>
@@ -106,9 +95,14 @@
             const post = ref({});
             let idPost = router.currentRoute.value.params.id;
             const baseUrl = 'http://hamiloblog.test/api';
+
+            const token = localStorage.getItem('token');
+            const enviado = ref(false);
+            const comentario = ref('');
             
             onMounted(() => {
                 console.log(idPost);
+                localStorage.setItem('ultimoPost', idPost);
                 obtenerDatos();
             })
 
@@ -144,11 +138,42 @@
                 }
             }
 
+            const enviarComentario = async () => {
+                if(comentario.value == ''){
+                    alert('Escriba un comentario');
+                    return;
+                }
+                try {
+                    const { data } = await axios.post(baseUrl + '/comentarios', {
+                                            post_id: idPost,
+                                            comentario: comentario.value,
+                                        }, {
+                                            headers: {
+                                                'Content-Type': 'application/json',
+                                                'Accept': 'application/json',
+                                                'Authorization': 'Bearer ' + token
+                                            }
+                                        });
+                    enviado.value = true;
+                    comentario.value = '';
+                    setTimeout(() => {
+                        enviado.value = false;
+                        obtenerDatos();
+                    }, 1000);
+                } catch (error) {
+                    console.log(error);
+                }
+            }
+
             return {
                 idPost,
                 post,
                 filtrar,
                 cambiarPost,
+                token,
+                enviado,
+                comentario,
+                enviarComentario,
             }
         }
     }

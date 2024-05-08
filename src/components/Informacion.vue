@@ -4,15 +4,15 @@
             <img class="mx-auto d-block w-75 bg-primary img-fluid rounded-circle mb-4 p-3" src="/persona.png" alt="Image">
             <h1 class="font-weight-bold">{{ nombre }}</h1>
             <p class="mb-4">
-                Justo stet no accusam stet invidunt sanctus magna clita vero eirmod, sit sit labore dolores lorem. Lorem at sit dolor dolores sed diam justo
+                Bienvenido a mi blog personal, espero que te guste y encuentres información útil para tus proyectos.
             </p>
             <div class="d-flex justify-content-center mb-5">
-                <a class="btn btn-outline-primary mr-2" href="#"><i class="fab fa-twitter"></i></a>
+                <a class="btn btn-outline-primary mr-2" href="https://x.com/@josema" target="__blank"><i class="fab fa-twitter"></i></a>
                 <a class="btn btn-outline-primary mr-2" href="#"><i class="fab fa-facebook-f"></i></a>
                 <a class="btn btn-outline-primary mr-2" href="#"><i class="fab fa-linkedin-in"></i></a>
                 <a class="btn btn-outline-primary mr-2" href="#"><i class="fab fa-instagram"></i></a>
             </div>
-            <a href="#" class="btn btn-lg btn-block btn-primary mt-auto">Hire Me</a>
+            <RouterLink to="/contacto" class="btn btn-lg btn-block btn-primary mt-auto">Contactame</RouterLink>
         </div>
         <div class="sidebar-icon d-flex flex-column h-100 justify-content-center text-right">
             <i class="fas fa-2x fa-angle-double-right text-primary"></i>

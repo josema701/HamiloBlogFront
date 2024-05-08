@@ -39,11 +39,6 @@
         </div>
     </div>
 
-
-
-    <div>
-        ascas
-    </div>
 </template>
 
 <script>

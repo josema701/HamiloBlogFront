@@ -92,8 +92,10 @@
             const password = ref('');
             const password_confirmation = ref('');
 
+            const ultimoPost = ref(null);
+
             onMounted(() => {
-                
+                ultimoPost.value = localStorage.getItem('ultimoPost');
             })
 
             const cambiarForm = () => {
@@ -121,7 +123,13 @@
                     console.log(data);
                     localStorage.setItem('token', data.token);
                     localStorage.setItem('usuario', JSON.stringify(data.usuario));
-                    router.push({path: '/blog'}); 
+
+                    if(ultimoPost.value != null && ultimoPost.value != undefined){
+                        router.push({path: '/vermas/' + ultimoPost.value});
+                    } else {
+                        router.push({path: '/blog'}); 
+                    }
+
                } catch (error) {
                     console.log(error);
                }
@@ -142,7 +150,11 @@
                     console.log(data);
                     localStorage.setItem('token', data.token);
                     localStorage.setItem('usuario', JSON.stringify(data.usuario));
-                    router.push({path: '/blog'}); 
+                    if(ultimoPost.value != null && ultimoPost.value != undefined){
+                        router.push({path: '/vermas/' + ultimoPost.value});
+                    } else {
+                        router.push({path: '/blog'}); 
+                    }
                } catch (error) {
                     console.log(error);
                }

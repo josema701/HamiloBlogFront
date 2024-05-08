@@ -23,8 +23,8 @@ import Informacion from './components/Informacion.vue'
                   <RouterLink to="/" class="nav-item nav-link">Inicio</RouterLink>
                   <RouterLink to="/blog" class="nav-item nav-link">Blog</RouterLink>
                   <RouterLink to="/categorias" class="nav-item nav-link">Categorías</RouterLink>
-                  <RouterLink to="/about" class="nav-item nav-link">Sobre mí</RouterLink>
-                  <RouterLink to="/about" class="nav-item nav-link">Contacto</RouterLink>
+                  <RouterLink to="/sobremi" class="nav-item nav-link">Sobre mí</RouterLink>
+                  <RouterLink to="/contacto" class="nav-item nav-link">Contacto</RouterLink>
 
                 </div>
             </div>

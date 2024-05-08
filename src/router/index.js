@@ -4,6 +4,8 @@ import VerMasView from '../views/VerMasView.vue'
 import CategoriasView from '../views/CategoriasView.vue'
 import BlogView from '../views/BlogView.vue'
 import AuthView from '../views/AuthView.vue'
+import SobreMiView from '../views/SobreMiView.vue'
+import ContactoView from '../views/ContactoView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -32,6 +34,16 @@ const router = createRouter({
       path: '/auth',
       name: 'auth',
       component: AuthView
+    },
+    {
+      path: '/sobremi',
+      name: 'sobremi',
+      component: SobreMiView
+    },
+    {
+      path: '/contacto',
+      name: 'contacto',
+      component: ContactoView
     },
     {
       path: '/about',
